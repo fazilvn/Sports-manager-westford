@@ -72,17 +72,29 @@ const userCount = db.prepare("SELECT count(*) as count FROM users").get() as { c
 if (userCount.count === 0) {
   db.prepare("INSERT INTO users (username, password, role, full_name) VALUES (?, ?, ?, ?)").run("admin", "admin123", "admin", "System Admin");
   
-  db.prepare("INSERT INTO campaigns (name, type, status, start_date, end_date, description) VALUES (?, ?, ?, ?, ?, ?)").run(
-    "Summer Spin & Win", "Spin and Win", "active", "2024-06-01", "2024-08-31", "Offline spin and win campaign at Westford Sports outlets."
+  db.prepare("INSERT INTO campaigns (name, type, status, start_date, end_date, description, num_winners, selection_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)").run(
+    "Summer Spin & Win", "Spin and Win", "active", "2026-03-01", "2026-05-31", "Offline spin and win campaign at Westford Sports outlets.", 5, "spin_and_win"
   );
-  db.prepare("INSERT INTO campaigns (name, type, status, start_date, end_date, description) VALUES (?, ?, ?, ?, ?, ?)").run(
-    "Winter Sports Fest", "Offline Event", "completed", "2023-12-01", "2023-12-15", "Annual winter sports festival."
+  db.prepare("INSERT INTO campaigns (name, type, status, start_date, end_date, description, num_winners) VALUES (?, ?, ?, ?, ?, ?, ?)").run(
+    "Westford Cricket League 2026", "Tournament", "active", "2026-02-15", "2026-03-15", "The premier cricket tournament for local clubs and teams.", 1
   );
-  db.prepare("INSERT INTO campaigns (name, type, status, start_date, end_date, description) VALUES (?, ?, ?, ?, ?, ?)").run(
-    "Spring Marathon 2024", "Marathon", "upcoming", "2024-04-15", "2024-04-16", "Get ready for the biggest marathon in the city. Register now to secure your spot."
+  db.prepare("INSERT INTO campaigns (name, type, status, start_date, end_date, description, num_winners) VALUES (?, ?, ?, ?, ?, ?, ?)").run(
+    "Winter Sports Fest", "Offline Event", "completed", "2025-12-01", "2025-12-15", "Annual winter sports festival.", 10
   );
-  db.prepare("INSERT INTO campaigns (name, type, status, start_date, end_date, description) VALUES (?, ?, ?, ?, ?, ?)").run(
-    "Tennis Open Championship", "Tournament", "upcoming", "2024-05-10", "2024-05-20", "Westford Sports presents the annual Tennis Open. Open for all age groups."
+  db.prepare("INSERT INTO campaigns (name, type, status, start_date, end_date, description, num_winners) VALUES (?, ?, ?, ?, ?, ?, ?)").run(
+    "New Year Fitness Drive", "Offline Event", "completed", "2026-01-01", "2026-01-31", "Start your year with a fitness challenge at our centers.", 3
+  );
+  db.prepare("INSERT INTO campaigns (name, type, status, start_date, end_date, description, num_winners) VALUES (?, ?, ?, ?, ?, ?, ?)").run(
+    "Spring Marathon 2026", "Marathon", "upcoming", "2026-04-15", "2026-04-16", "Get ready for the biggest marathon in the city. Register now to secure your spot.", 1
+  );
+  db.prepare("INSERT INTO campaigns (name, type, status, start_date, end_date, description, num_winners) VALUES (?, ?, ?, ?, ?, ?, ?)").run(
+    "Tennis Open Championship", "Tournament", "upcoming", "2026-05-10", "2026-05-20", "Westford Sports presents the annual Tennis Open. Open for all age groups.", 2
+  );
+  db.prepare("INSERT INTO campaigns (name, type, status, start_date, end_date, description, num_winners) VALUES (?, ?, ?, ?, ?, ?, ?)").run(
+    "Summer Swimming Gala", "Tournament", "upcoming", "2026-06-20", "2026-06-25", "Cool off with our annual swimming competition for all ages.", 5
+  );
+  db.prepare("INSERT INTO campaigns (name, type, status, start_date, end_date, description, num_winners) VALUES (?, ?, ?, ?, ?, ?, ?)").run(
+    "Badminton Smash Challenge", "Offline Event", "active", "2026-03-01", "2026-03-10", "Test your reflexes in our quick-fire badminton challenge.", 2
   );
 
   const campaign = db.prepare("SELECT id FROM campaigns WHERE name = ?").get("Summer Spin & Win") as { id: number };
