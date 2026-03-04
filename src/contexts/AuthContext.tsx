@@ -24,6 +24,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const savedUser = localStorage.getItem("westford_user");
     if (savedUser) {
       setUser(JSON.parse(savedUser));
+    } else {
+      // Provide a default admin user if none exists
+      const defaultUser = {
+        id: 1,
+        username: "admin",
+        role: "admin",
+        full_name: "Administrator"
+      };
+      setUser(defaultUser);
+      localStorage.setItem("westford_user", JSON.stringify(defaultUser));
     }
     setIsLoading(false);
   }, []);

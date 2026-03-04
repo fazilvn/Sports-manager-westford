@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import Layout from "./components/Layout";
-import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Campaigns from "./pages/Campaigns";
 import CreateCampaign from "./pages/CreateCampaign";
@@ -11,68 +10,58 @@ import Participants from "./pages/Participants";
 import Users from "./pages/Users";
 import PublicCampaignView from "./pages/PublicCampaignView";
 
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { user, isLoading } = useAuth();
-
-  if (isLoading) return null;
-  if (!user) return <Navigate to="/login" replace />;
-
-  return <Layout>{children}</Layout>;
-}
-
 export default function App() {
   return (
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/login" element={<Login />} />
           <Route path="/view/:id" element={<PublicCampaignView />} />
           <Route
             path="/"
             element={
-              <ProtectedRoute>
+              <Layout>
                 <Dashboard />
-              </ProtectedRoute>
+              </Layout>
             }
           />
           <Route
             path="/campaigns"
             element={
-              <ProtectedRoute>
+              <Layout>
                 <Campaigns />
-              </ProtectedRoute>
+              </Layout>
             }
           />
           <Route
             path="/campaigns/create"
             element={
-              <ProtectedRoute>
+              <Layout>
                 <CreateCampaign />
-              </ProtectedRoute>
+              </Layout>
             }
           />
           <Route
             path="/campaigns/:id"
             element={
-              <ProtectedRoute>
+              <Layout>
                 <CampaignDetails />
-              </ProtectedRoute>
+              </Layout>
             }
           />
           <Route
             path="/participants"
             element={
-              <ProtectedRoute>
+              <Layout>
                 <Participants />
-              </ProtectedRoute>
+              </Layout>
             }
           />
           <Route
             path="/users"
             element={
-              <ProtectedRoute>
+              <Layout>
                 <Users />
-              </ProtectedRoute>
+              </Layout>
             }
           />
           <Route path="*" element={<Navigate to="/" replace />} />

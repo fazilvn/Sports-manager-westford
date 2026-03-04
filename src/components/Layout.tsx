@@ -6,7 +6,6 @@ import {
   Flag, 
   Users, 
   UserCircle, 
-  LogOut,
   Trophy,
   Menu,
   X
@@ -19,14 +18,9 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
 
   const navItems = [
     { name: "Dashboard", path: "/", icon: LayoutDashboard },
@@ -74,13 +68,7 @@ export default function Layout({ children }: LayoutProps) {
               <p className="text-xs text-slate-500 truncate capitalize">{user?.role}</p>
             </div>
           </div>
-          <button
-            onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-red-50 hover:text-red-600 rounded-xl transition-all duration-200"
-          >
-            <LogOut size={20} />
-            Logout
-          </button>
+          {/* Logout removed as login is removed */}
         </div>
       </aside>
 
@@ -121,13 +109,7 @@ export default function Layout({ children }: LayoutProps) {
                   {item.name}
                 </NavLink>
               ))}
-              <button
-                onClick={handleLogout}
-                className="w-full flex items-center gap-3 px-4 py-4 text-slate-500 text-lg"
-              >
-                <LogOut size={24} />
-                Logout
-              </button>
+              {/* Logout removed */}
             </nav>
           </motion.div>
         )}
